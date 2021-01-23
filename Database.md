@@ -54,6 +54,7 @@ Occurances should be incremented each time the data is manually labeled.
 | category       | text      | Always keep the category name in lower case, to prevent duplicates |
 | labeled        | boolean   | true if the category has been labeled by a human                   |
 | amount         | float     |
+| date           | date      | the transaction date in the form 'yyyy-mm-dd'                      |
 
 Primary key (transaction_id)
 
