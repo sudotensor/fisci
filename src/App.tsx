@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Header } from "./components/Header";
-import { TransactionForm } from "./components/TransactionForm";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { LoginPage } from "./pages/LoginPage";
+import { OverviewPage } from "./pages/OverviewPage";
+import { InsightsPage } from "./pages/InsightsPage";
+import { TransactionsPage } from "./pages/TransactionsPage";
+import { GuidesPage } from "./pages/GuidesPage";
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -16,16 +21,42 @@ function App() {
   }, []);
 
   return (
-<div className="App">
-          <header className="App-header">
-              <Header/>
-          </header>
-          <main>
-              <TransactionForm/>
-              <p id={'api-test'}><code>API TEST: </code>The current time
-                  is {new Date(currentTime).toLocaleTimeString()}.</p>
-          </main>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Header />
+        </header>
+        <nav>
+          <Link to={"/"}>Overview</Link>
+          <Link to={"/transactions"}>Transactions</Link>
+          <Link to={"/insights"}>Insights</Link>
+          <Link to={"/guides"}>Guides for understanding finance</Link>
+        </nav>
+        <main>
+          <Switch>
+            <Route path={"/login"}>
+              <LoginPage />
+            </Route>
+            <Route path={"/transactions"}>
+              <TransactionsPage />
+            </Route>
+            <Route path={"/insights"}>
+              <InsightsPage />
+            </Route>
+            <Route path={"/guides"}>
+              <GuidesPage />
+            </Route>
+            <Route path={"/"}>
+              <OverviewPage />
+            </Route>
+          </Switch>
+          <p id={"api-test"}>
+            <code>API TEST: </code>The current time is{" "}
+            {new Date(currentTime * 1000).toLocaleTimeString()}
+          </p>
+        </main>
       </div>
+    </Router>
   );
 }
 
