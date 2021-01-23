@@ -43,7 +43,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000",
   "devDependencies": {
     "firebase": "^8.2.4"
   }

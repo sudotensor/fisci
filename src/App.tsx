@@ -6,9 +6,12 @@ function App() {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
+    fetch('https://fisci-iqk43m4jga-ew.a.run.app/time')
+        .then(res => res.json())
+        .then(data => {
       setCurrentTime(data.time);
-    });
+    })
+        .catch(e=>console.error('Error fetching time from API',e))
   }, []);
 
   return (
