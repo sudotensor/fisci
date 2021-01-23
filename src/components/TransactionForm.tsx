@@ -11,7 +11,15 @@ export const TransactionForm = () => {
                     className={'new-transaction'}>New transaction
             </button>
             {
-                Array(numberOfTransactions).fill(<TransactionInput/>)
+                Array(numberOfTransactions).fill(0).map((z, i) => <TransactionInput key={i}
+                                                                                    listNumber={i + 1}/>)
+            }
+            {
+                numberOfTransactions > 0 &&
+                <button className={'submit-transactions'} onClick={() => {
+                    console.log('Transactions submitted')
+                }
+                }>Submit</button>
             }
         </div>
     )

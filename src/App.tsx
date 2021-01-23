@@ -22,7 +22,8 @@ function App() {
           </header>
           <main>
               <TransactionForm/>
-              <p id={'api-test'}><code>API TEST: </code>The current time is {currentTime}.</p>
+              <p id={'api-test'}><code>API TEST: </code>The current time
+                  is {new Date(currentTime).toLocaleTimeString()}.</p>
           </main>
       </div>
   );
