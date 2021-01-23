@@ -1,6 +1,6 @@
-import './transaction-form.css'
-import {TransactionInput} from "./TransactionInput";
-import {useState} from "react";
+import "./transaction-form.css";
+import { TransactionInput } from "./TransactionInput";
+import { useState } from "react";
 
 export const TransactionForm = () => {
     const [numberOfTransactions, setNumberOfTransactions] = useState(0)

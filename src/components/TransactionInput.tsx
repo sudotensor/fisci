@@ -1,4 +1,4 @@
-import './transaction-form.css'
+import "./transaction-form.css";
 
 export const TransactionInput = (props: { listNumber: number }) => {
 

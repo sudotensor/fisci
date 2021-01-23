@@ -12,6 +12,7 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
     "typescript": "^4.0.3",
@@ -44,6 +45,14 @@
     ]
   },
   "devDependencies": {
-    "firebase": "^8.2.4"
+    "firebase": "^8.2.4",
+    "husky": "^4.3.8",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
