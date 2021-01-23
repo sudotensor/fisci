@@ -16,17 +16,16 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Header />
-      </header>
-      <main>
-        <TransactionForm />
-        <p id={"api-test"}>
-          <code>API TEST: </code>The current time is {currentTime}.
-        </p>
-      </main>
-    </div>
+<div className="App">
+          <header className="App-header">
+              <Header/>
+          </header>
+          <main>
+              <TransactionForm/>
+              <p id={'api-test'}><code>API TEST: </code>The current time
+                  is {new Date(currentTime).toLocaleTimeString()}.</p>
+          </main>
+      </div>
   );
 }
 

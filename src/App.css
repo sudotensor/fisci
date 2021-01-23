@@ -28,12 +28,30 @@
   font-size: 0.5em;
 }
 
+.App-header a {
+  color: aliceblue;
+  text-decoration: none;
+  transform: scale(5) rotate(90deg);
+  /*transition: all 1s ease-in;*/
+}
+
+.App-header a:hover {
+  color: dodgerblue;
+  transform: scale(5) rotate(90deg);
+}
+
+.App-header:hover a {
+  transform: scale(2) rotate(90deg);
+  transition: all 1s ease-in;
+}
+
 
 main {
   max-width: 60em;
   align-self: center;
   justify-self: center;
   margin: auto;
+  overflow-x: scroll;
 }
 
 h3 {
