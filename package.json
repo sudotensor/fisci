@@ -20,7 +20,7 @@
     "start": "react-scripts start",
     "start-api-unix": "cd api && python3 -m venv venv && source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt && export FLASK_ENV=development && export FLASK_APP=api.py && flask run --no-debugger",
     "start-api-windows": "cd api && python -m venv venv && venv\\Scripts\\activate && pip install --upgrade pip && pip install -r requirements.txt && set FLASK_ENV=development && set FLASK_APP=api.py && flask run --no-debugger",
-    "build": "react-scripts build",
+    "build": "yarn install && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
