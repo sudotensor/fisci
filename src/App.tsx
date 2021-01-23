@@ -1,37 +1,30 @@
-import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {Header} from "./components/Header";
+import {TransactionForm} from "./components/TransactionForm";
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
 
-  useEffect(() => {
-    fetch('https://fisci-iqk43m4jga-ew.a.run.app/time')
-        .then(res => res.json())
-        .then(data => {
-      setCurrentTime(data.time);
-    })
-        .catch(e=>console.error('Error fetching time from API',e))
-  }, []);
+    useEffect(() => {
+        fetch('https://fisci-iqk43m4jga-ew.a.run.app/time')
+            .then(res => res.json())
+            .then(data => {
+                setCurrentTime(data.time);
+            })
+            .catch(e => console.error('Error fetching time from API', e))
+    }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>The current time is {currentTime}.</p>
-      </header>
-    </div>
+      <div className="App">
+          <header className="App-header">
+              <Header/>
+          </header>
+          <main>
+              <TransactionForm/>
+              <p id={'api-test'}><code>API TEST: </code>The current time is {currentTime}.</p>
+          </main>
+      </div>
   );
 }
 

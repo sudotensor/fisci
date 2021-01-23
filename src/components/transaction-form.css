@@ -1,0 +1,27 @@
+
+div.transaction-form {
+    align-self: flex-start;
+    justify-self: flex-start;
+}
+
+div.transaction-details input {
+    padding: 0.1em;
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    margin: 0.2em;
+}
+
+div.transaction-details {
+    padding: 0.5em 0;
+    margin: 0.2em;
+    border: dashed #282c34;
+    border-width: 1px 0 0 0;
+    display: flex;
+}
+
+button.new-transaction {
+    padding: 0.5em;
+    border-radius: 0.3em;
+    border: 2px solid #11557C;
+    background-color: #A5D6D9;
+    color: #282c34;
+}
