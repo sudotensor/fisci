@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import "./App.css";
 
@@ -12,9 +12,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import List from "@material-ui/core/List";
 import Drawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
@@ -131,7 +129,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [open, setOpen] = React.useState(true);
 
@@ -160,15 +157,6 @@ function App() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  useEffect(() => {
-    fetch("https://fisci-iqk43m4jga-ew.a.run.app/time")
-      .then((res) => res.json())
-      .then((data) => {
-        setCurrentTime(data.time);
-      })
-      .catch((e) => console.error("Error fetching time from API", e));
-  }, []);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -203,11 +191,6 @@ function App() {
                 >
                   Fisci
                 </Typography>
-                <IconButton color="inherit">
-                  <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
               </Toolbar>
             </AppBar>
             <Drawer
@@ -248,12 +231,8 @@ function App() {
                     <OverviewPage />
                   </Route>
                 </Switch>
-                <p id={"api-test"}>
-                  <code>API TEST: </code>The current time is{" "}
-                  {new Date(currentTime * 1000).toLocaleTimeString()}
-                </p>
               </Container>
-            </main>
+            </main>{" "}
           </div>
         </Router>
       </LoginContext.Provider>
