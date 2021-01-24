@@ -19,6 +19,7 @@ export function TransactionsPage(props: Props) {
             <img
               width={20}
               height={20}
+              alt={"download"}
               src={
                 "https://www.flaticon.com/svg/vstatic/svg/860/860801.svg?token=exp=1611481664~hmac=0ad7506d2e14df29b6a9b5e8a996c580"
               }
@@ -32,6 +33,7 @@ export function TransactionsPage(props: Props) {
             <img
               width={20}
               height={20}
+              alt={"plus"}
               src={
                 "https://www.flaticon.com/svg/vstatic/svg/748/748113.svg?token=exp=1611481697~hmac=3abd51a1c2b3e445af126be743230072"
               }
