@@ -5,6 +5,7 @@ from flask_cors import CORS
 from connect_database import get_database_client
 import pandas as pd
 import numpy as np
+from errors import *
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -65,8 +66,7 @@ def upload_transaction():
     return {"msg": "success"}
 
 
-def bad_request(message):
-    return error_response(400, message)
+
 
 
 if __name__ == '__main__':
