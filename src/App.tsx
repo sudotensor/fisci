@@ -22,6 +22,10 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { makeStyles } from "@material-ui/core/styles";
 import { mainListItems, secondaryListItems } from "./listItems";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { LoginContext } from "./LoginContext";
+import firebase from "firebase/app";
+import "firebase/auth";
+import fire from "./firebase";
 import clsx from "clsx";
 
 const drawerWidth = 240;
@@ -109,8 +113,15 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
-  const classes = useStyles();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [open, setOpen] = React.useState(true);
+  const classes = useStyles();
+
+  fire.auth().onAuthStateChanged((u: firebase.User | null) => {
+    u ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    console.log("Updated isLoggedIn", isLoggedIn);
+  });
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -128,87 +139,92 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="absolute"
-          className={clsx(classes.appBar, open && classes.appBarShift)}
-        >
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              className={clsx(
-                classes.menuButton,
-                open && classes.menuButtonHidden
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Fisci
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List>{secondaryListItems}</List>
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" className={classes.container}>
-            <Switch>
-              <Route path={"/login"}>
-                <LoginPage />
-              </Route>
-              <Route path={"/transactions"}>
-                <TransactionsPage />
-              </Route>
-              <Route path={"/insights"}>
-                <InsightsPage />
-              </Route>
-              <Route path={"/guides"}>
-                <GuidesPage />
-              </Route>
-              <Route path={"/"}>
-                <OverviewPage />
-              </Route>
-            </Switch>
-            <p id={"api-test"}>
-              <code>API TEST: </code>The current time is{" "}
-              {new Date(currentTime * 1000).toLocaleTimeString()}
-            </p>
-          </Container>
-        </main>
-      </div>
-    </Router>
+    <LoginContext.Provider value={isLoggedIn}>
+      <Router>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar
+            position="absolute"
+            className={clsx(classes.appBar, open && classes.appBarShift)}
+          >
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                className={clsx(
+                  classes.menuButton,
+                  open && classes.menuButtonHidden
+                )}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                className={classes.title}
+              >
+                Fisci
+              </Typography>
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: clsx(
+                classes.drawerPaper,
+                !open && classes.drawerPaperClose
+              ),
+            }}
+            open={open}
+          >
+            <div className={classes.toolbarIcon}>
+              <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <Divider />
+            <List>{mainListItems}</List>
+            <Divider />
+            <List>{secondaryListItems}</List>
+          </Drawer>
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
+            <Container maxWidth="lg" className={classes.container}>
+              <Switch>
+                <Route path={"/login"}>
+                  <LoginPage />
+                </Route>
+                <Route path={"/transactions"}>
+                  <TransactionsPage />
+                </Route>
+                <Route path={"/insights"}>
+                  <InsightsPage />
+                </Route>
+                <Route path={"/guides"}>
+                  <GuidesPage />
+                </Route>
+                <Route path={"/"}>
+                  <OverviewPage />
+                </Route>
+              </Switch>
+              <p id={"api-test"}>
+                <code>API TEST: </code>The current time is{" "}
+                {new Date(currentTime * 1000).toLocaleTimeString()}
+              </p>
+            </Container>
+          </main>
+        </div>
+      </Router>
+    </LoginContext.Provider>
   );
 }
 

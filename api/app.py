@@ -1,11 +1,12 @@
 import time
 import os
-from flask import Flask, request, Response
+from flask import Flask, request, Response, jsonify
 from flask_cors import CORS
 from connect_database import get_database_client
 import pandas as pd
 import numpy as np
 from errors import error_response, bad_request
+from cassandra.query import ordered_dict_factory
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -79,6 +80,21 @@ def add_transaction():
     
     return {"message": "success"}
 
+
+@app.route('/trans/get/<user_id>', methods = ["GET"])
+def get_transaction(user_id):
+
+    """User gets all previous transactions in json"""
+
+    session = get_database_client()
+    session.row_factory = ordered_dict_factory
+
+    #query result
+    rows = session.execute_async("SELECT * FROM fisci.transactions WHERE user_id = %s ;", (user_id))
+    data = rows.result()
+    
+    #jsonify
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
