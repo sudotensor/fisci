@@ -25,7 +25,8 @@
     "start-api-windows": "cd api && python -m venv venv && venv\\Scripts\\activate && pip install --upgrade pip && pip install -r requirements.txt && set FLASK_ENV=development && set FLASK_APP=app.py && flask run --no-debugger",
     "build": "yarn install && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "emulate": "firebase emulators:start"
   },
   "eslintConfig": {
     "extends": [

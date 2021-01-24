@@ -1,14 +1,14 @@
 {
   "hosting": {
     "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
+        "destination": "index.html"
+      },
+      {
+        "source": "/api/**",
         "run": {
           "serviceId": "flask-container",
           "region": "europe-west1"
