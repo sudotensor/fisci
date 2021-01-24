@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fraunces&display=swap");
 
 .App {
   text-align: left;
@@ -21,7 +21,8 @@
 }
 
 .App-header h1 {
-  font-family: 'Fraunces', serif;
+  font-family: "Fraunces", serif;
+  transition: all 0.5s ease;
 }
 
 .App-header p {
@@ -42,9 +43,12 @@
 
 .App-header:hover a {
   transform: scale(2) rotate(90deg);
-  transition: all 1s ease-in;
+  transition: color 0.2s linear;
 }
 
+.App-header:hover h1 {
+  transform: scale(1.2);
+}
 
 main {
   max-width: 60em;
@@ -62,4 +66,29 @@ h3 {
 #api-test {
   position: absolute;
   bottom: 0;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  max-width: 70em;
+}
+
+nav a {
+  display: inline-block;
+  width: 25%;
+  margin: 0;
+  padding: 10px;
+  text-decoration: none;
+  text-align: center;
+  background-color: aliceblue;
+  color: navy;
+  transition: all 0.3s ease-in-out;
+}
+
+nav a:hover {
+  background-color: dodgerblue;
+  color: whitesmoke;
+  transform: scale(0.95);
 }
