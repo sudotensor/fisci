@@ -16,5 +16,4 @@ if (firebase.apps.length === 0) firebase.initializeApp(config);
 
 console.log("is logged in? ", firebase.apps.length);
 
-const fire = firebase;
 export default firebase;
