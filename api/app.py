@@ -5,7 +5,7 @@ from flask_cors import CORS
 from connect_database import get_database_client
 import pandas as pd
 import numpy as np
-from errors import *
+from errors import error_response, bad_request
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -16,6 +16,10 @@ def get_current_time():
 
 @app.route('/trans/upload', methods = ["POST", "GET"])
 def upload_transaction_csv():
+    """
+    batch upload the transaction by a csv file
+    """
+
     if request.method == "POST":
         # parse the csv file
         f = request.files['csv']
@@ -40,33 +44,40 @@ def upload_transaction_csv():
                     bool(df.labeled[i]), float(df.amount[i]), df.date[i])
                 )
             except Exception as err:
-                print(err)
-                return Response("{'msg': 'Error parsing csv'}", status = 500, mimetype = 'application/json')
-        return {"msg": "success"}
+                error_response(500, "Error parsing csv. " + str(err))
+        return {"message": "success"}
     else:
-        return {"msg": "Nothing happened. Please POST the csv file"}
+        return {"message": "Nothing happened. Please POST the csv file"}
 
 
-@app.route('/trans/upload', methods = ["POST"])
-def upload_transaction():
+@app.route('/trans/add', methods = ["POST"])
+def add_transaction():
 
     """User send transaction details to be uploaded to the database
     Data is received in json format"""
 
+    # parse the request
     data = request.get_json() or {}
-    if 'date' not in data or 'shop_name' not in data or 'amount' not in data:
-        return bad_request('must include date, shop name and amount fields')
-    
+    # check required fields
+    required_fields = ["user_id", "shop_name", "category", "amount", "date"]
+    for f in required_fields:
+        if f not in data:
+            return bad_request("Required field " + f + " is missing")
+    # add labeled field
+    data["labeled"] = len(data["category"]) == 0    # user provided the category or not
+    # connect to db
     session = get_database_client()
-
-    session.execute("INSERT INTO fisci.transactions (transaction_id, user_id, shop_name, category, labeled, amount, date)
-                    VALUES (data['transaction_id'], data['userid'], data['shop_name'], data['category'], data['labeled'], data['amount'], data['date']);")
-                    
+    # update db
+    try:
+        session.execute("""
+        INSERT INTO fisci.transactions (transaction_id, user_id, shop_name, category, labeled, amount, date)
+        VALUES (now(), %s, %s, %s, %s, %s, %s);
+        """, (data["user_id"], data["shop_name"], data["category"], 
+        data["labeled"], float(data["amount"]), data["date"]))
+    except Exception as err:
+        return error_response(500, "Error in updating the database. " + str(err))    
     
-    return {"msg": "success"}
-
-
-
+    return {"message": "success"}
 
 
 if __name__ == '__main__':
