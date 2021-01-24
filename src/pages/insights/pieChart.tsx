@@ -8,26 +8,14 @@ import {
 } from "@devexpress/dx-react-chart-material-ui";
 
 import { Animation } from "@devexpress/dx-react-chart";
-import firebase from "firebase/app";
+import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
-export const PieChart = () => {
+export const AnimatedPieChart = () => {
   const [data, setData] = useState();
-  //     const [data, setData] = useState([
-  //   {
-  //     "category": "food",
-  //     "spending": 301.82
-  //   },
-  //   {
-  //     "category": "clothing",
-  //     "spending": 87.05
-  //   }
-  // ])
 
   useEffect(() => {
     // fetch graph data from the API
-    let userId = firebase.auth().currentUser
-      ? firebase.auth().currentUser?.uid
-      : "Amy";
+    let userId = "Amy";
     console.log("Users: ", userId);
     fetch(
       "https://flask-container-iqk43m4jga-ew.a.run.app/stats/category/" + userId
@@ -57,5 +45,43 @@ export const PieChart = () => {
         )}
       </Paper>
     </div>
+  );
+};
+
+export const CategoryBreakdownPieChart = () => {
+  const [data, setData] = useState<undefined | []>();
+
+  useEffect(() => {
+    // fetch graph data from the API
+    let userId = "Amy";
+    fetch(
+      "https://flask-container-iqk43m4jga-ew.a.run.app/stats/category/" + userId
+    )
+      .then((r) => r.json())
+      .then((j) => {
+        setData(j.data);
+      });
+  }, []);
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  return (
+    <Paper>
+      <PieChart width={500} height={500}>
+        <Pie
+          data={data}
+          dataKey="spending"
+          nameKey="category"
+          cx="50%"
+          cy="50%"
+          innerRadius={120}
+          outerRadius={180}
+          fill="#82ca9d"
+        >
+          {data?.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+        <Tooltip />
+      </PieChart>
+    </Paper>
   );
 };
