@@ -161,8 +161,8 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <LoginContext.Provider value={isLoggedIn}>
-        <Router>
-          <div className={classes.root}>
+        <div className={classes.root}>
+          <Router>
             <CssBaseline />
             <AppBar
               position="absolute"
@@ -233,8 +233,8 @@ function App() {
                 </Switch>
               </Container>
             </main>{" "}
-          </div>
-        </Router>
+          </Router>
+        </div>
       </LoginContext.Provider>
     </ThemeProvider>
   );

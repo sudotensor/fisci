@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { TransactionForm } from "../components/TransactionForm";
+import Divider from "@material-ui/core/Divider";
 import "./transactions-page.css";
 
 type Props = {};
@@ -9,8 +10,11 @@ export function TransactionsPage(props: Props) {
   const [showForm, setShowForm] = useState(false);
   return (
     <div>
-      <h1>Transactions</h1>
-      <p>This is where you can see previous transactions, or enter new ones</p>
+      <h1 style={{ marginBottom: 4 }}>Transactions</h1>
+      <Divider />
+      <p style={{ fontSize: 16 }}>
+        This is where you can see previous transactions, or enter new ones
+      </p>
 
       <div className={"row"}>
         <h2>Transaction records</h2>
