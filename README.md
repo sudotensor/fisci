@@ -2,7 +2,7 @@
 
 > Latin translation: '_Finance_'
 
-Fisci is a finance management web application that helps small businesses and individuals track their spending to become more financially responsible. The app was developed in collaboration with [Brain Evans](https://github.com/mrbrianevans), [Randolph Liu](https://github.com/RandolphLiu), [Anya Sims](https://github.com/aas89), and [Bryan Ang](https://github.com/bryangwj) as a submission for Hex Cambridge 2020.
+Fisci is a finance management web application that helps small businesses and individuals track their spending to become more financially responsible. The app was developed in collaboration with [Brian Evans](https://github.com/mrbrianevans), [Randolph Liu](https://github.com/RandolphLiu), [Anya Sims](https://github.com/aas89), and [Bryan Ang](https://github.com/bryangwj) as a submission for Hex Cambridge 2020.
 
 ## Inspiration
 Due to lockdowns across the world, many individuals and small businesses
