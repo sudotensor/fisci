@@ -157,14 +157,14 @@ def stats_by_time(user_id):
     return {"data": result_list}
 
 
-@app.route('/trans/del/<transaction_id>', methods=['DELETE'])
+@app.route('/trans/del/<uuid:transaction_id>', methods=['DELETE'])
 def remove_transaction(transaction_id):
 
     """Remove transaction based on transaction_id"""
     
     try:
         session = get_database_client()
-        session.execute("DELETE FROM fisci.transactions WHERE transaction_id = %s ALLOW FILTERING;", (transaction_id, ))
+        session.execute("DELETE FROM fisci.transactions WHERE transaction_id=%s;", (transaction_id, ))
 
     except Exception as err:
         return error_response(500, "Error in deleting the transaction. " + str(err))    

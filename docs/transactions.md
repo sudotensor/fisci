@@ -104,3 +104,19 @@ GET baseurl/trans/get/<user_id>
     }
 ]
 ```
+
+### Remove a transaction by id
+
+#### Request
+
+```
+GET baseurl/trans/del/<transaction_id>
+```
+
+#### Success response
+
+```json
+{
+    "message": "success"
+}
+```
