@@ -117,7 +117,7 @@ def fetch_by_user(user_id, session):
         "shop_name": [ entry.shop_name for entry in result ],
         "category": [ entry.category for entry in result ],
         "labeled": [ bool(entry.labeled) for entry in result ],
-        "amount": [ float(entry.amount) for entry in result ],
+        "amount": [ round(float(entry.amount), 2) for entry in result ],
         "date": [ str(entry.date) for entry in result ]
     })
     return df
