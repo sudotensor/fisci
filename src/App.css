@@ -14,6 +14,20 @@
   font-size: calc(1em + 2vmin);
   color: white;
   text-align: center;
+  animation-name: scale;
+  animation-duration: 1s;
+}
+
+@keyframes scale {
+  from {
+    min-height: 100vh;
+  }
+  50% {
+    min-height: 100vh;
+  }
+  to {
+    min-height: 10vh;
+  }
 }
 
 .App-header sub {
@@ -72,19 +86,37 @@ nav {
   display: flex;
   flex-direction: row;
   margin: auto;
-  max-width: 70em;
+  /*max-width: 70em;*/
+  background-color: aliceblue;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+nav div {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+nav div a {
+  width: 25%;
 }
 
 nav a {
-  display: inline-block;
-  width: 25%;
-  margin: 0;
+  display: grid;
+  place-items: center;
+  /*margin: auto;*/
   padding: 10px;
   text-decoration: none;
   text-align: center;
   background-color: aliceblue;
   color: navy;
   transition: all 0.3s ease-in-out;
+}
+
+nav > a {
+  width: 10%;
 }
 
 nav a:hover {

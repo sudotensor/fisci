@@ -27,10 +27,14 @@ function App() {
           <Header />
         </header>
         <nav>
-          <Link to={"/"}>Overview</Link>
-          <Link to={"/transactions"}>Transactions</Link>
-          <Link to={"/insights"}>Insights</Link>
-          <Link to={"/guides"}>Guides for understanding finance</Link>
+          <h2>Fisci</h2>
+          <div>
+            <Link to={"/"}>Overview</Link>
+            <Link to={"/transactions"}>Transactions</Link>
+            <Link to={"/insights"}>Insights</Link>
+            <Link to={"/guides"}>Guides for understanding finance</Link>
+          </div>
+          <Link to={"/login"}>Login</Link>
         </nav>
         <main>
           <Switch>
