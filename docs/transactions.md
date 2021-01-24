@@ -71,3 +71,36 @@ POST baseurl/trans/upload
     "message": "success"
 }
 ```
+
+### Get the transactions from a single user
+
+#### Request
+
+```
+GET baseurl/trans/get/<user_id>
+```
+
+#### Success response
+
+```json
+[
+    {
+        "amount": 7.980000019073486,
+        "category": "Provisions - General",
+        "date": "2014-04-20",
+        "labeled": true,
+        "shop_name": "ARGOS LTD",
+        "transaction_id": "9d7f1590-5dd9-11eb-9ddb-cfe6a86cc440",
+        "user_id": "Tommy"
+    },
+    {
+        "amount": 15,
+        "category": "Marketing",
+        "date": "2014-05-07",
+        "labeled": true,
+        "shop_name": "123RF.COM",
+        "transaction_id": "9078bbd0-5dd9-11eb-9ddb-cfe6a86cc440",
+        "user_id": "Tommy"
+    }
+]
+```

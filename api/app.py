@@ -90,11 +90,71 @@ def get_transaction(user_id):
     session.row_factory = ordered_dict_factory
 
     #query result
-    rows = session.execute_async("SELECT * FROM fisci.transactions WHERE user_id = %s ;", (user_id))
-    data = rows.result()
+    rows = session.execute_async("SELECT * FROM fisci.transactions WHERE user_id = %s ALLOW FILTERING;", (user_id, ))
+    data = list(rows.result().all())
+    # convert the date filed
+    for entry in data:
+        entry["date"] = str(entry["date"])
     
     #jsonify
     return jsonify(data)
+
+def fetch_by_user(user_id, session):
+    """
+    fetch transactions by user
+    return a padas dataframe, otherwise return a string
+    """
+    try:
+        result = session.execute(
+            "SELECT * FROM fisci.transactions WHERE user_id=%s ALLOW FILTERING",
+            [user_id]
+        )
+    except Exception as err:
+        return str(err)
+    # convert to dataframe
+    result = list(result)
+    df = pd.DataFrame({
+        "shop_name": [ entry.shop_name for entry in result ],
+        "category": [ entry.category for entry in result ],
+        "labeled": [ bool(entry.labeled) for entry in result ],
+        "amount": [ float(entry.amount) for entry in result ],
+        "date": [ str(entry.date) for entry in result ]
+    })
+    return df
+
+@app.route('/stats/category/<user_id>')
+def stats_by_category(user_id):
+    """
+    Fetch all the transactions categorized
+    """
+
+    # connect the database
+    session = get_database_client()
+    # fetch user-related transactions
+    df = fetch_by_user(user_id, session)
+    if type(df) != pd.DataFrame:
+        return error_response(500, "Error fetching transactions. " + df)
+    # sum by category
+    result = df.groupby("category").sum()["amount"]
+    result_list = [ {"category": key, "spending": val} for key, val in dict(result).items() ]
+    return {"data": result_list}
+
+@app.route('/stats/time/<user_id>')
+def stats_by_time(user_id):
+    """
+    Fetch all transactions and sum by time
+    """
+
+    # connect the database
+    session = get_database_client()
+    # fetch user data
+    df = fetch_by_user(user_id, session)
+    if type(df) != pd.DataFrame:
+        return error_response(500, "Error fetching transactions. " + df)
+    # sum over time
+    result = df.groupby("date").sum()["amount"]
+    result_list = [ {"date": key, "spending": val} for key, val in dict(result).items() ]
+    return {"data": result_list}
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
