@@ -39,9 +39,9 @@ import fire from "./firebase";
 import "firebase/auth";
 
 // Misc.
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainListItems } from "./listItems";
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -227,8 +227,6 @@ function App() {
               </div>
               <Divider className={classes.divider} />
               <List>{mainListItems}</List>
-              <Divider className={classes.divider} />
-              <List>{secondaryListItems}</List>
             </Drawer>
             <main className={classes.content}>
               <div className={classes.appBarSpacer} />

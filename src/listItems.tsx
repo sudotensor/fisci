@@ -12,25 +12,40 @@ import { Link } from "react-router-dom";
 
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to={"/"}>
+    <ListItem button component={Link} to={"/"} style={{ paddingLeft: 24 }}>
       <ListItemIcon>
         <DashboardIcon fill="white" />
       </ListItemIcon>
       <ListItemText primary="Overview" />
     </ListItem>
-    <ListItem button component={Link} to={"/transactions"}>
+    <ListItem
+      button
+      component={Link}
+      to={"/transactions"}
+      style={{ paddingLeft: 24 }}
+    >
       <ListItemIcon>
         <BankIcon />
       </ListItemIcon>
       <ListItemText primary="Transactions" />
     </ListItem>
-    <ListItem button component={Link} to={"/insights"}>
+    <ListItem
+      button
+      component={Link}
+      to={"/insights"}
+      style={{ paddingLeft: 24 }}
+    >
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Insights" />
     </ListItem>
-    <ListItem button component={Link} to={"/guides"}>
+    <ListItem
+      button
+      component={Link}
+      to={"/guides"}
+      style={{ paddingLeft: 24 }}
+    >
       <ListItemIcon>
         <LibraryIcon />
       </ListItemIcon>
