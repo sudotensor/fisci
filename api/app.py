@@ -156,5 +156,20 @@ def stats_by_time(user_id):
     result_list = [ {"date": key, "spending": val} for key, val in dict(result).items() ]
     return {"data": result_list}
 
+
+@app.route('/trans/del/<transaction_id>', methods=['DELETE'])
+def remove_transaction(transaction_id):
+
+    """Remove transaction based on transaction_id"""
+    
+    try:
+        session = get_database_client()
+        session.execute("DELETE FROM fisci.transactions WHERE transaction_id = %s ALLOW FILTERING;", (transaction_id, ))
+
+    except Exception as err:
+        return error_response(500, "Error in deleting the transaction. " + str(err))    
+    
+    return {"message": "success"}
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
