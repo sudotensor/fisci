@@ -65,15 +65,15 @@ export const CategoryBreakdownPieChart = () => {
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
   return (
     <Paper>
-      <PieChart width={500} height={500}>
+      <PieChart width={300} height={500}>
         <Pie
           data={data}
           dataKey="spending"
           nameKey="category"
           cx="50%"
           cy="50%"
-          innerRadius={120}
-          outerRadius={180}
+          innerRadius={100}
+          outerRadius={150}
           fill="#82ca9d"
         >
           {data?.map((entry, index) => (
