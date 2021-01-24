@@ -1,46 +1,54 @@
-# Getting Started with Create React App
+## Fisci
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Latin translation: '_Finance_'
 
-## Available Scripts
+Fisci is a finance management web application that helps small businesses and individuals track their spending to become more financially responsible. The app was developed in collaboration with [Brain Evans](https://github.com/mrbrianevans), [Randolph Liu](https://github.com/RandolphLiu), [Anya Sims](https://github.com/aas89), and [Bryan Ang](https://github.com/bryangwj) as a submission for Hex Cambridge 2020.
 
-In the project directory, you can run:
+## Inspiration
+Due to lockdowns across the world, many individuals and small businesses
+        have struggled financially; this inspired us to make managing finances
+        simple while offering helpful insights into a user's spending habits.
 
-### `yarn start`
+## What does Fisci do?
+With Fisci, users have the ability to enter their transaction history
+        through the transaction table tab and analyse their spending patterns
+        through the insights page. Users also have a guide page containing
+        curated resources on how to be financially stable; this page also
+        includes resources for small businesses on COVID guidelines and funding.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How was Fisci built?
+Fisci has a React.js front-end and a Python Flask back-end. The back-end
+        on Google Cloud Run (GCR) instance and the front-end is served through
+        Firebase hosting. Further, the domain was registered through Domain.com
+        and the transaction records are stored in a Cassandra database from
+        Datastax Astra.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Challenges
+The team was quite new to Firebase authentication and using CQL for the
+        database. The former took quite a lot of time to setup and experiment
+        with, but ultimately we didn't have enough time to include it in the
+        final product. However, it was indeed a great learning opportunity to
+        learn how to set it up. The Material UI documentation was quite
+        cumbersome to go through, and the sheer size of the library proved quite
+        overwhelming
 
-### `yarn test`
+## Accomplishments
+We're proud of having a lightning fast backend and a smooth-as-butter,
+        minimalist front-end that provides a great user experience.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Learning Opportunity
+ We're also proud of have learned quite a lot about developing web apps
+        in React with Python Flask as a backend - the part of linking the app
+        with Google Cloud was particularly interesting. We also learned how to
+        collaborate better by paralellising tasks and gained technical knowlege
+        from one another.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## What's Next?
+Our next steps is to polish the app and link it with Firebase
+        authentication (Sign-in with Google) and to add time-series prediction
+        based on transaction history. We also plan on making the app mobile
+        compatible with features to scan receipts and invoices and automatically
+        populate the transaction table. A big step would be to use an
+        OpenBanking API to automatically feed in the user transactions from
+        their bank account. Also, we plan on adding a subscription (renewal
+        payments) tracker that would remind users when a subscription is due.
