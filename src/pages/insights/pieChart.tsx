@@ -41,7 +41,6 @@ export const PieChart = () => {
   useEffect(() => {
     console.log("Data: ", data);
   }, [data]);
-  const label = (l: string) => <p>{l}</p>;
   return (
     <div>
       <Paper>
