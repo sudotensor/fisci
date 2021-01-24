@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/scripts
 
 # production
 /build
@@ -26,3 +27,4 @@ yarn-error.log*
 # flask 
 venv
 __pycache__
+

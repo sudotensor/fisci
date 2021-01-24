@@ -1,6 +1,14 @@
 div.transaction-form {
   align-self: flex-start;
   justify-self: flex-start;
+  position: absolute;
+  top: 20vh;
+  height: 60vh;
+  left: 20%;
+  width: 60%;
+  background: lightsteelblue;
+  border-radius: 1em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 div.transaction-details input {
@@ -10,10 +18,10 @@ div.transaction-details input {
 }
 
 div.transaction-details span {
-    padding: 0 1em;
-    border: solid rgba(0, 0, 0, 0.9);
-    border-width: 0 0 0 3px;
-    margin: 0.2em;
+  padding: 0 1em;
+  border: solid rgba(0, 0, 0, 0.9);
+  border-width: 0 0 0 3px;
+  margin: 0.2em;
 }
 
 div.transaction-details {
@@ -25,8 +33,8 @@ div.transaction-details {
 }
 
 div.transaction-form button {
-    padding: 0.5em;
-    border-radius: 0.3em;
+  padding: 0.5em;
+  border-radius: 0.3em;
 }
 
 button.new-transaction {
@@ -38,8 +46,8 @@ button.new-transaction {
 }
 
 button.submit-transactions {
-    float: right;
-    color: #0c410c;
-    background-color: palegreen;
-    border: 2px solid forestgreen;
+  float: right;
+  color: #0c410c;
+  background-color: palegreen;
+  border: 2px solid forestgreen;
 }
