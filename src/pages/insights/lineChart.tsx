@@ -1,52 +1,28 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
-import {
-  Chart,
-  LineSeries,
-  Title,
-} from "@devexpress/dx-react-chart-material-ui";
+import { Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 
-import { Animation } from "@devexpress/dx-react-chart";
-import firebase from "firebase/app";
-
-export const LineChart = () => {
+export const SpendingOverTimeLineChart = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
     // fetch graph data from the API
-    let userId = firebase.auth().currentUser
-      ? firebase.auth().currentUser?.uid
-      : "Amy";
-    console.log("Users: ", userId);
-    fetch(
-      "https://flask-container-iqk43m4jga-ew.a.run.app/stats/time/" + userId
-    )
+
+    fetch("https://flask-container-iqk43m4jga-ew.a.run.app/stats/time/Amy")
       .then((r) => r.json())
       .then((j) => {
         setData(j.data);
       });
   }, []);
-
-  useEffect(() => {
-    console.log("Data: ", data);
-  }, [data]);
-
   return (
-    <div>
-      <Paper>
-        {data && (
-          <Chart data={data}>
-            <LineSeries
-              argumentField={"date"}
-              valueField={"spending"}
-              name={"Spending"}
-            />
-            <Title text="Spending over time" />
-            <Animation />
-          </Chart>
-        )}
-      </Paper>
-    </div>
+    <Paper style={{ padding: 20 }}>
+      <LineChart data={data} width={800} height={400}>
+        <Line type="monotone" dataKey="spending" stroke="#8884d8" />
+        <XAxis dataKey={"date"} />
+        <YAxis />
+        <Tooltip />
+      </LineChart>
+    </Paper>
   );
 };

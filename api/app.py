@@ -117,7 +117,7 @@ def fetch_by_user(user_id, session):
         "shop_name": [ entry.shop_name for entry in result ],
         "category": [ entry.category for entry in result ],
         "labeled": [ bool(entry.labeled) for entry in result ],
-        "amount": [ float(entry.amount) for entry in result ],
+        "amount": [ round(float(entry.amount), 2) for entry in result ],
         "date": [ str(entry.date) for entry in result ]
     })
     return df
@@ -155,6 +155,21 @@ def stats_by_time(user_id):
     result = df.groupby("date").sum()["amount"]
     result_list = [ {"date": key, "spending": val} for key, val in dict(result).items() ]
     return {"data": result_list}
+
+
+@app.route('/trans/del/<uuid:transaction_id>', methods=['DELETE'])
+def remove_transaction(transaction_id):
+
+    """Remove transaction based on transaction_id"""
+    
+    try:
+        session = get_database_client()
+        session.execute("DELETE FROM fisci.transactions WHERE transaction_id=%s;", (transaction_id, ))
+
+    except Exception as err:
+        return error_response(500, "Error in deleting the transaction. " + str(err))    
+    
+    return {"message": "success"}
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
