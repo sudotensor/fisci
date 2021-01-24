@@ -14,7 +14,7 @@ export const mainListItems = (
   <div>
     <ListItem button component={Link} to={"/"}>
       <ListItemIcon>
-        <DashboardIcon />
+        <DashboardIcon fill="white" />
       </ListItemIcon>
       <ListItemText primary="Overview" />
     </ListItem>
